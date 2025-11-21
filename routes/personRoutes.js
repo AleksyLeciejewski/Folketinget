@@ -9,7 +9,7 @@ router.get('/politicalParty', controller.getPersonByParty);
 
 router.get('/person/:id', controller.getPersonById);
 
-router.post('/', validation.validateAddPerson,
+router.post('/',
     validation.checkDuplicatePerson,
     controller.addPerson);
 

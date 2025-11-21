@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const routes = require('../Feedback_Folketingets/routes/personRoutes');
@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/Folketinget',
+mongoose.connect('mongodb://localhost:27017/Folketinget', //In the following projekt ill implement this with an .env file
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -29,3 +29,33 @@ app.listen(port, () => {
 })
 
 module.exports = app;
+
+ */
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+
+const routes = require('./routes/personRoutes');
+const errorHandler = require('./middlewares/globalErrorHandler');
+const notFound = require('./middlewares/notFound');
+
+const app = express();
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+mongoose.connect('mongodb://localhost:27017/Folketinget', {
+}).then(() => console.log('Connected to database successfully.'))
+    .catch(err => console.error("MongoDB connection error: ", err));
+
+app.use('/api/persons', routes);
+
+app.use(notFound);
+app.use(errorHandler);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server started on port ${port}`));
+
+module.exports = app;
+
