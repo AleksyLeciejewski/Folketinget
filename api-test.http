@@ -1,0 +1,92 @@
+### Get all
+GET http://localhost:3000/api/persons
+###
+
+
+### POST
+POST http://localhost:3000/api/persons
+Content-Type: application/json
+
+{
+  "name": "Mette Frederiksen",
+  "role": "Minister",
+  "politicalParty": "Socialdemokratiet"
+}
+
+###
+
+### POST
+POST http://localhost:3000/api/persons
+Content-Type: application/json
+
+{
+  "name": "Lars Løkke Rasmussen",
+  "role": "Minister",
+  "politicalParty": "Moderaterne"
+}
+
+###
+
+### POST
+POST http://localhost:3000/api/persons
+Content-Type: application/json
+
+{
+  "name": "Jakob Ellemann-Jensen",
+  "role": "Formand",
+  "politicalParty": "Venstre"
+}
+
+###
+
+### GET personer fra Socialdemokratiet
+GET http://localhost:3000/api/persons/party/Socialdemokratiet
+
+###
+
+### GET personer fra Moderaterne
+GET http://localhost:3000/api/persons/party/Moderaterne
+
+###
+
+### Test 8: PUT - Opdater person til Formand (Erstát ID'et)
+PUT http://localhost:3000/api/persons/674c6f8e9b1a2c3d4e5f6789
+Content-Type: application/json
+
+{
+  "role": "Formand"
+}
+
+###
+
+### Test 9: PUT - Opdater navn og parti (Erstát ID'et)
+PUT http://localhost:3000/api/persons/674c6f8e9b1a2c3d4e5f6789
+Content-Type: application/json
+
+{
+  "name": "Mette Frederiksen",
+  "role": "Minister",
+  "politicalParty": "Socialdemokratiet"
+}
+
+###
+
+### Test 10: DELETE person (Erstát ID'et)
+DELETE http://localhost:3000/api/persons/674c6f8e9b1a2c3d4e5f6789
+
+###
+
+### Test 11: GET ikke-eksisterende person (404 test)
+GET http://localhost:3000/api/persons/000000000000000000000000
+
+###
+
+### Test 12: GET ikke-eksisterende parti (404 test)
+GET http://localhost:3000/api/persons/party/IkkeEksisterendeParti
+
+###
+
+### Test 13: Test 404 - Forkert route
+GET http://localhost:3000/api/notfound
+
+###
